@@ -9,6 +9,8 @@ public class Main {
         game.register(player1);
         game.register(player2);
 
+        System.out.println(game.getPlayers());
+
         //game.round("Саша", "Артём");
         int battle = game.round("Саша", "Паша");
         System.out.println(battle);

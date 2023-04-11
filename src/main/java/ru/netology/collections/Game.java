@@ -1,24 +1,24 @@
 package ru.netology.collections;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Game {
-    private List<Player> players = new ArrayList<>();
+    private Map<String, Player> players = new HashMap<>();
 
-    public List<Player> getPlayers() {
+    public Map<String, Player> getPlayers() {
         return players;
     }
 
     public void register(Player player) {
-        if (!players.contains(player)) {
-            players.add(player);
+        if (!players.containsKey(player.getName())) {
+            players.put(player.getName(), player);
         }
     }
 
     public int round(String playerName1, String playerName2) throws NotRegisteredException {
-        Player player1 = findPlayer(playerName1);
-        Player player2 = findPlayer(playerName2);
+        Player player1 = players.get(playerName1);
+        Player player2 = players.get(playerName2);
 
         if (player1 == null || player2 == null) {
             throw new NotRegisteredException("Один или оба игроков не зарегистрированы");
@@ -31,14 +31,5 @@ public class Game {
         } else {
             return 0;
         }
-    }
-
-    private Player findPlayer(String playerName) {
-        for (Player player : players) {
-            if (player.getName().equals(playerName)) {
-                return player;
-            }
-        }
-        return null;
     }
 }
